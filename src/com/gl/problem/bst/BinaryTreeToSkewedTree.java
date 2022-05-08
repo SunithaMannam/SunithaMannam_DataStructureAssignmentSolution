@@ -4,26 +4,27 @@ package com.gl.problem.bst;
 class Node {
 	int val;
 	Node left, right;
- 
+
 	Node(int item) {
 		val = item;
 		left = right = null;
 	}
 }
 
+// BST converting to Right skewed tree
 public class BinaryTreeToSkewedTree {
 
 	public static Node node;
 	static Node prevNode = null;
 	static Node headNode = null;
+	
+	
+	public static void covertToSkewedTree(Node root, int order) {
 
-	static void covertToSkewedTree(Node root, int order) {
-	 
 		if (root == null) {
 			return;
 		}
 
- 
 		if (order > 0) {
 			covertToSkewedTree(root.right, order);
 		} else {
@@ -31,7 +32,7 @@ public class BinaryTreeToSkewedTree {
 		}
 		Node rightNode = root.right;
 		Node leftNode = root.left;
- 
+
 		if (headNode == null) {
 			headNode = root;
 			root.left = null;
@@ -42,7 +43,6 @@ public class BinaryTreeToSkewedTree {
 			prevNode = root;
 		}
 
- 
 		if (order > 0) {
 			covertToSkewedTree(leftNode, order);
 		} else {
@@ -59,15 +59,15 @@ public class BinaryTreeToSkewedTree {
 	}
 
 	public static void main(String[] args) {
- 
+
 		BinaryTreeToSkewedTree tree = new BinaryTreeToSkewedTree();
- 
- 		tree.node = new Node(50);
+
+		tree.node = new Node(50);
 		tree.node.left = new Node(30);
 		tree.node.right = new Node(60);
 		tree.node.left.left = new Node(10);
-		tree.node.right.left= new Node(55);
-		
+		tree.node.right.left = new Node(55);
+
 		int order = 0;
 		covertToSkewedTree(node, order);
 		displaySkewedTree(headNode);
